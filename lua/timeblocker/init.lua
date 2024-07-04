@@ -94,7 +94,7 @@ local function update_now_highlight()
 	end
 end
 
-function M.open_time_blocker()
+function M.open_timeblocker()
 	setup_highlight(M.options.now_color)
 	-- Get the file path based on today's date
 	local file_path = get_file_path()
@@ -129,49 +129,49 @@ function M.open_time_blocker()
 		buf,
 		"n",
 		"+",
-		':lua require("time_blocker").add_new_block()<CR>',
+		':lua require("timeblocker").add_new_block()<CR>',
 		{ noremap = true, silent = true }
 	)
 	vim.api.nvim_buf_set_keymap(
 		buf,
 		"n",
 		"-",
-		':lua require("time_blocker").remove_block()<CR>',
+		':lua require("timeblocker").remove_block()<CR>',
 		{ noremap = true, silent = true }
 	)
 	vim.api.nvim_buf_set_keymap(
 		buf,
 		"n",
 		".",
-		':lua require("time_blocker").repeat_block()<CR>',
+		':lua require("timeblocker").repeat_block()<CR>',
 		{ noremap = true, silent = true }
 	)
 	vim.api.nvim_buf_set_keymap(
 		buf,
 		"n",
 		"c",
-		':lua require("time_blocker").copy_block()<CR>',
+		':lua require("timeblocker").copy_block()<CR>',
 		{ noremap = true, silent = true }
 	)
 	vim.api.nvim_buf_set_keymap(
 		buf,
 		"n",
 		"x",
-		':lua require("time_blocker").cut_block()<CR>',
+		':lua require("timeblocker").cut_block()<CR>',
 		{ noremap = true, silent = true }
 	)
 	vim.api.nvim_buf_set_keymap(
 		buf,
 		"n",
 		"v",
-		':lua require("time_blocker").paste()<CR>',
+		':lua require("timeblocker").paste()<CR>',
 		{ noremap = true, silent = true }
 	)
 	vim.api.nvim_buf_set_keymap(
 		buf,
 		"n",
 		"r",
-		':lua require("time_blocker").reset()<CR>',
+		':lua require("timeblocker").reset()<CR>',
 		{ noremap = true, silent = true }
 	)
 
@@ -424,9 +424,10 @@ function M.reset()
 end
 
 function M.setup(user_options)
+	print("Inside setup function")
 	M.options = vim.tbl_deep_extend("force", default_options, user_options)
 	vim.api.nvim_create_user_command("TimeBlocker", function()
-		require("time_blocker").open_time_blocker()
+		require("timeblocker").open_timeblocker()
 	end, {})
 end
 
